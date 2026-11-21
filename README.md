@@ -12,7 +12,7 @@ authentication services for each project and want to own their data, this projec
 
 ## Getting Started
 
-Follow these steps to initialize the api before running it\
+Follow these steps to initialize the api before running it
 
 1. Create jwt private and public keys
 
@@ -53,8 +53,8 @@ pip install -r requirements.txt
 APP_HOST=127.0.0.1
 APP_PORT=8000
 DATABASE_TYPE="document" # or relational
-DOCUMENT_DATABASE_URI=mongodb://127.0.0.1:27017/rbac_api_db
-RELATIONAL_DATABASE_URI=""
+DOCUMENT_DATABASE_URL=mongodb://127.0.0.1:27017/rbac_api_db
+RELATIONAL_DATABASE_URL=""
 DATABASE_NAME=rbac_api_db
 ENV=development
 API_PREFIX=/rbac_api

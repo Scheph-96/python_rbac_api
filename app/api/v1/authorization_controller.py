@@ -1,8 +1,7 @@
-from fastapi import APIRouter, Depends, BackgroundTasks
+from fastapi import APIRouter, Depends, BackgroundTasks, Request
 
 from app.api.v1.authentication_controller import get_user_service
 from app.core.config import Settings
-from app.database.document.document_db import document_db
 from app.models.dependencies_model.authorization_dependencies import AuthorizationDependencies
 from app.repositories.document.authorization_repositories.permission_document_repository import \
     PermissionDocumentRepository
@@ -11,13 +10,6 @@ from app.repositories.document.authorization_repositories.role_permission_docume
     RolePermissionDocumentRepository
 from app.repositories.document.authorization_repositories.user_role_document_repository import \
     UserRoleDocumentRepository
-from app.repositories.relational.authorization_repositories.permission_relational_repository import \
-    PermissionRelationalRepository
-from app.repositories.relational.authorization_repositories.role_permission_relational_repository import \
-    RolePermissionRelationalRepository
-from app.repositories.relational.authorization_repositories.role_relational_repository import RoleRelationalRepository
-from app.repositories.relational.authorization_repositories.user_role_relational_repository import \
-    UserRoleRelationalRepository
 from app.schemas.authorization_schema.permission_schema import CreatePermissionSchema, AssignPermissionToRoleSchema, \
     RemovePermissionFromRoleSchema, DeletePermissionSchema
 from app.schemas.authorization_schema.role_schema import AssignRoleSchema, CreateRoleSchema, RemoveUserRoleSchema, \
@@ -38,43 +30,23 @@ router = APIRouter(prefix=f"{Settings.API_PREFIX}/authorize")
 
 # ------------------------------------------ REPOSITORIES DEPENDENCIES ------------------------------------------#
 # Dependency: role repository
-def get_role_repository():
-    if Settings.DATABASE_TYPE == "document":
-        return RoleDocumentRepository(document_db[Settings.ROLES_COLLECTION])
-    elif Settings.DATABASE_TYPE == "relational":
-        return RoleRelationalRepository(Settings.SQLALCHEMY_METADATA.tables[f"{Settings.ROLES_COLLECTION}"])
-
-    return None
+def get_role_repository(request: Request):
+    return request.my_app.state.role_repository
 
 
 # Dependency: permission repository
-def get_permission_repository():
-    if Settings.DATABASE_TYPE == "document":
-        return PermissionDocumentRepository(document_db[Settings.PERMISSIONS_COLLECTION])
-    elif Settings.DATABASE_TYPE == "relational":
-        return PermissionRelationalRepository(Settings.SQLALCHEMY_METADATA.tables[f"{Settings.PERMISSIONS_COLLECTION}"])
-
-    return None
+def get_permission_repository(request: Request):
+    return request.my_app.state.permission_repository
 
 
 # Dependency: rolePermission repository
-def get_role_permission_repository():
-    if Settings.DATABASE_TYPE == "document":
-        return RolePermissionDocumentRepository(document_db[Settings.ROLE_PERMISSIONS_COLLECTION])
-    elif Settings.DATABASE_TYPE == "relational":
-        return RolePermissionRelationalRepository(Settings.SQLALCHEMY_METADATA.tables[f"{Settings.ROLE_PERMISSIONS_COLLECTION}"])
-
-    return None
+def get_role_permission_repository(request: Request):
+    return request.my_app.state.role_permission_repository
 
 
 # Dependency: userRole repository
-def get_user_role_repository():
-    if Settings.DATABASE_TYPE == "document":
-        return UserRoleDocumentRepository(document_db[Settings.USER_ROLES_COLLECTION])
-    elif Settings.DATABASE_TYPE == "relational":
-        return UserRoleRelationalRepository(Settings.SQLALCHEMY_METADATA.tables[f"{Settings.USER_ROLES_COLLECTION}"])
-
-    return None
+def get_user_role_repository(request: Request):
+    return request.my_app.state.user_role_repository
 
 
 # ------------------------------------------ SERVICES DEPENDENCIES ------------------------------------------#
