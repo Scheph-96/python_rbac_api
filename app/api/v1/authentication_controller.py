@@ -40,22 +40,22 @@ router = APIRouter(prefix=f"{Settings.API_PREFIX}/authenticate")
 # ------------------------------------------ REPOSITORIES DEPENDENCIES ------------------------------------------#
 # Dependency: emailValidation repository
 def get_email_validation_repository(request: Request):
-    return request.my_app.state.email_validation_repository
+    return request.app.state.email_validation_repository
 
 
 # Dependency: user repository
 def get_user_repository(request: Request):
-    return request.my_app.state.user_repository
+    return request.app.state.user_repository
 
 
 # Dependency: refreshToken repository
 def get_refresh_token_repository(request: Request):
-    return request.my_app.state.refresh_token_repository
+    return request.app.state.refresh_token_repository
 
 
 # Dependency: passwordRecoveryToken repository
 def get_password_recovery_token_repository(request: Request):
-    return request.my_app.state.password_recovery_token_repository
+    return request.app.state.password_recovery_token_repository
 
 
 # ------------------------------------------ SERVICES DEPENDENCIES ------------------------------------------#

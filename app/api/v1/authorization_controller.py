@@ -31,22 +31,22 @@ router = APIRouter(prefix=f"{Settings.API_PREFIX}/authorize")
 # ------------------------------------------ REPOSITORIES DEPENDENCIES ------------------------------------------#
 # Dependency: role repository
 def get_role_repository(request: Request):
-    return request.my_app.state.role_repository
+    return request.app.state.role_repository
 
 
 # Dependency: permission repository
 def get_permission_repository(request: Request):
-    return request.my_app.state.permission_repository
+    return request.app.state.permission_repository
 
 
 # Dependency: rolePermission repository
 def get_role_permission_repository(request: Request):
-    return request.my_app.state.role_permission_repository
+    return request.app.state.role_permission_repository
 
 
 # Dependency: userRole repository
 def get_user_role_repository(request: Request):
-    return request.my_app.state.user_role_repository
+    return request.app.state.user_role_repository
 
 
 # ------------------------------------------ SERVICES DEPENDENCIES ------------------------------------------#
