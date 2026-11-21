@@ -15,8 +15,8 @@ class Settings:
     APP_PORT: int = int(os.environ["APP_PORT"])
     ENV: str = os.environ["ENV"]
     DATABASE_TYPE: str = os.environ["DATABASE_TYPE"]
-    DOCUMENT_DATABASE_URI: str = os.environ["DOCUMENT_DATABASE_URI"]
-    RELATIONAL_DATABASE_URI: str = os.environ["RELATIONAL_DATABASE_URI"]
+    DOCUMENT_DATABASE_URL: str = os.environ["DOCUMENT_DATABASE_URL"]
+    RELATIONAL_DATABASE_URL: str = os.environ["RELATIONAL_DATABASE_URL"]
     DATABASE_NAME: str = os.environ["DATABASE_NAME"]
     PRIVATE_KEY_PATH: str = os.path.join(Path(__file__).resolve().parent.parent, os.environ["PRIVATE_KEY_PATH"])
     PUBLIC_KEY_PATH: str = os.path.join(Path(__file__).resolve().parent.parent, os.environ["PUBLIC_KEY_PATH"])
@@ -38,7 +38,7 @@ class Settings:
     OPERATION_SUCCESS_EVENT_LABEL = "OperationSuccess"
     COLLECTION_EVENT_LABEL = "CollectionEvent"
     SQLALCHEMY_METADATA: MetaData = MetaData()
-    ACTIVATE_AUTHORIZATION_INTERFACE = True # Setting this parameter to `True` include authorization routes to the api (Disabled by default)
+    ACTIVATE_AUTHORIZATION_INTERFACE = False # Setting this parameter to `True` include authorization routes to the api (Disabled by default)
 
     #################### COLLECTIONS NAME ####################
 

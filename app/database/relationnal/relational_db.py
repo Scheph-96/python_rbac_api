@@ -11,17 +11,22 @@ from app.core.logging.logger import get_logger
 from app.database.relationnal.tables.authentication_sql import init_authentication_tables
 from app.database.relationnal.tables.authorization_sql import init_authorization_tables
 
-logger = get_logger("startup")
-app_async_engine = create_async_engine(Settings.RELATIONAL_DATABASE_URI, echo=False)
+logger = get_logger("relational_db")
+if Settings.DATABASE_TYPE == "relational" and not Settings.RELATIONAL_DATABASE_URL:
+    logger.error("RELATIONAL DATABASE URL NOT DEFINED. CHECK .ENV")
+    raise Exception("Relational database initialization failed")
 
-async_local_session = async_sessionmaker(bind=app_async_engine, expire_on_commit=False)
+if Settings.DATABASE_TYPE == "relational":
+    app_async_engine = create_async_engine(Settings.RELATIONAL_DATABASE_URL, echo=False)
+
+    async_local_session = async_sessionmaker(bind=app_async_engine, expire_on_commit=False)
 
 
 async def init_relational_database():
     """
         Initialize relational database
     """
-    database_url = make_url(Settings.RELATIONAL_DATABASE_URI)
+    database_url = make_url(Settings.RELATIONAL_DATABASE_URL)
     database_name = database_url.database
 
     # Commit to the maintenance database instead.
