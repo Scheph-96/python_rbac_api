@@ -45,7 +45,7 @@ async def lifespan(app: FastAPI):
                 or not Settings.SMTP_PASSWORD
                 or not Settings.SMTP_FROM):
             logger.error("SMTP variables are not initialized. Check .env")
-            raise
+            raise Exception("SMTP variables are not initialized")
 
     logger.info(f"Application Running at http://{Settings.APP_HOST}:{Settings.APP_PORT}")
 
