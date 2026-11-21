@@ -15,8 +15,10 @@ class Settings:
     APP_PORT: int = int(os.environ["APP_PORT"])
     ENV: str = os.environ["ENV"]
     DATABASE_TYPE: str = os.environ["DATABASE_TYPE"]
-    DOCUMENT_DATABASE_URL: str = os.environ["DOCUMENT_DATABASE_URL"]
-    RELATIONAL_DATABASE_URL: str = os.environ["RELATIONAL_DATABASE_URL"]
+    if DATABASE_TYPE == "document":
+        DOCUMENT_DATABASE_URL: str = os.environ["DOCUMENT_DATABASE_URL"]
+    if DATABASE_TYPE == "relational":
+        RELATIONAL_DATABASE_URL: str = os.environ["RELATIONAL_DATABASE_URL"]
     DATABASE_NAME: str = os.environ["DATABASE_NAME"]
     PRIVATE_KEY_PATH: str = os.path.join(Path(__file__).resolve().parent.parent, os.environ["PRIVATE_KEY_PATH"])
     PUBLIC_KEY_PATH: str = os.path.join(Path(__file__).resolve().parent.parent, os.environ["PUBLIC_KEY_PATH"])

@@ -7,14 +7,23 @@ authentication services for each project and want to own their data, this projec
 ## Prerequisites
 
 > Python 3.14+\
-> Postgres 17+; or any other relational rdbms. The app was built and tested with PostgreSQL\
+> Postgres 17+; or any other relational dbms. The app was built and tested with PostgreSQL\
 > Mongo 8+
 
 ## Getting Started
 
 Follow these steps to initialize the api before running it
 
-1. Create jwt private and public keys
+1. Clone the repoaitory
+```shell
+# For ssh connexion
+git clone git@github.com:Scheph-96/python_rbac_api.git
+
+# For https connexion
+git clone https://github.com/Scheph-96/python_rbac_api.git
+```
+
+2. Create jwt private and public keys
 
 ```shell
 # In the terminal navigate to app/keys/ in the project folder and run:
@@ -28,7 +37,7 @@ openssl rsa -in private.pem -pubout -out public.pem
 
 Learn more in [Authentication.md](docs/authentication.md)
 
-2. Create a virtual environment and install required package listed in requirements.txt
+3. Create a virtual environment and install required package listed in requirements.txt
 
 ```shell
 # In the terminal navigate to the project root and run:
@@ -43,7 +52,7 @@ source <your_environment_name>/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Update environment variables\
+4. Update environment variables\
    These variables are initialized for code in [Settings](app/core/config.py)
 
 ```shell

@@ -55,4 +55,4 @@ async def init_database(logger, my_app):
 
     else:
         logger.error("Unsupported database type")
-        raise
+        raise Exception("Unsupported database type")

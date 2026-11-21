@@ -154,6 +154,10 @@ class AuthenticationService:
         :return: Confirmation String
         """
 
+        if not Settings.EMAIL_VALIDATION:
+            self.logger.error("Email Validation is not enabled. Check Settings(app/core/config.py)")
+            raise Exception("Email Validation is not enabled")
+
         # Retrieve user data
         user = await self.auth_depends.user_service.get_by_id(data["user_id"])
         user = User(**user) if user is not None else None
