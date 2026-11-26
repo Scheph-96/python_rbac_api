@@ -163,7 +163,7 @@ A cached list of permissions computed from user roles.
 3. Auth API validate credentials and log user in
 4. Auth API returns:
     - Access Token (15 min)
-    - Refresh Token (30 days)
+    - Refresh Token (15 days)
 
 [Learn more](docs/authentication.md)
 
